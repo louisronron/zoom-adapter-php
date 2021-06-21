@@ -6,6 +6,19 @@ class ZoomMeetingAdapter {
 
 
 
+    public static function getUserIDByEmail($hostEmail) {
+        /*
+            Gets the user ID by email (for meeting host)
+
+            This function calls the REST API endpoint documented
+            at https://marketplace.zoom.us/docs/api-reference/zoom-api/users/user.
+        */
+
+    }
+
+
+
+
     public static function listMeetings($hostUserID) {
         /*
             Lists all meetings organized by the host user.
