@@ -1,8 +1,10 @@
 <?php
 
+require_once __DIR__ . '/vendor/autoload.php';
 
 
 class ZoomMeetingAdapter {
+
 
 
 
@@ -13,6 +15,8 @@ class ZoomMeetingAdapter {
             This function calls the REST API endpoint documented
             at https://marketplace.zoom.us/docs/api-reference/zoom-api/users/user.
         */
+
+        
 
     }
 
