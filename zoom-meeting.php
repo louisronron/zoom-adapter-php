@@ -412,13 +412,20 @@ class ZoomMeetingAdapter {
     }
 
 
-    public static function addMeetingRegistrant($meetingID) {
+    public static function addMeetingRegistrant($meetingID, $email, $first_name, $last_name,
+        $address, $city, $country, $zip, $state, $phone, $industry, $org, $job_title, 
+        $purchasing_time_frame, $role_in_purchase_process, $no_of_employees, $comments) 
+    {
         /*
             Adds a new meeting registrant
 
             This function calls the REST API endpoint documented
             at https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrantcreate.
         */
+
+
+
+        
     }
 
 
