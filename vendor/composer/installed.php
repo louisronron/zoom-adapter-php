@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'c297a6c8fd275ecf6fbe2aae45d3129eec60a02d',
+    'reference' => 'c7a716142121678cced21cb4504c8d8e294cfdc9',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'c297a6c8fd275ecf6fbe2aae45d3129eec60a02d',
+      'reference' => 'c7a716142121678cced21cb4504c8d8e294cfdc9',
     ),
     'kriswallsmith/buzz' => 
     array (
@@ -28,6 +28,15 @@
       array (
       ),
       'reference' => 'e7468d13f33fb6656068372533f2a446602fef09',
+    ),
+    'php-curl-class/php-curl-class' => 
+    array (
+      'pretty_version' => '9.2.0',
+      'version' => '9.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8b73ad5b3556585282ad58a22689d54aef614a9d',
     ),
     'php-http/client-implementation' => 
     array (

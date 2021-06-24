@@ -7,9 +7,9 @@ namespace Composer\Autoload;
 class ComposerStaticInit584365c475e47d878e11bd7b49177d72
 {
     public static $files = array (
-        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
-        '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
+        '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -28,6 +28,10 @@ class ComposerStaticInit584365c475e47d878e11bd7b49177d72
         array (
             'Http\\Promise\\' => 13,
             'Http\\Client\\' => 12,
+        ),
+        'C' => 
+        array (
+            'Curl\\' => 5,
         ),
         'B' => 
         array (
@@ -50,8 +54,8 @@ class ComposerStaticInit584365c475e47d878e11bd7b49177d72
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -64,6 +68,10 @@ class ComposerStaticInit584365c475e47d878e11bd7b49177d72
         'Http\\Client\\' => 
         array (
             0 => __DIR__ . '/..' . '/php-http/httplug/src',
+        ),
+        'Curl\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-curl-class/php-curl-class/src/Curl',
         ),
         'Buzz\\' => 
         array (
