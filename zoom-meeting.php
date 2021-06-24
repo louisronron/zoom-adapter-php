@@ -1,6 +1,8 @@
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
+
+// Documentation for php-curl-class at https://github.com/php-curl-class/php-curl-class 
 use Curl\Curl;
 
 
@@ -33,7 +35,7 @@ class ZoomMeetingAdapter {
         /*
 
 
-        Example API response
+        Example API Response
 
         
         {
@@ -223,7 +225,7 @@ class ZoomMeetingAdapter {
         /*
 
 
-        Example API Request
+        Example API Response
 
 
         {
@@ -317,18 +319,96 @@ class ZoomMeetingAdapter {
             return $array["invitation"];
         }
 
+
+
+        /*
+
+
+        Example API Response
+
+
+        {
+        "invitation": "Shrijana G is inviting you to a scheduled Zoom meeting.\r\n\r\nTopic: MyTestMeeting\r\nTime: Jul 31, 2019 04:00 PM Pacific Time (US and Canada)\r\n\r\nJoin Zoom Meeting\r\nhttps://zoom.us/j/000000\r\n\r\nOne tap mobile\r\n+000000"
+        }
+
+
+        */
+
+
+
     }
 
 
 
 
-    public static function listMeetingRegistrants($meetingID) {
+    public static function listMeetingRegistrants($meetingID, $bearerApiToken) {
         /*
             Lists all the registrants of a meeting.
 
             This function calls the REST API endpoint documented
             at https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants.
         */
+        $curl = new Curl();
+        $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
+        $curl->get('https://api.zoom.us/v2/meetings/'.$meetingID.'/registrants');
+
+        if($curl->error) {
+            return false;
+        } else {
+            $array = json_decode(json_encode($curl->response), true);
+            return $array;
+        }
+
+
+        /*
+
+        Example API Response
+
+        {
+        "page_count": 1,
+        "page_number": 1,
+        "page_size": 1,
+        "total_records": 1,
+        "registrants": [
+            {
+            "email": "somemeail@emailprovider.com",
+            "first_name": "Tim",
+            "last_name": "S.",
+            "id": "zjkfsdfjdfhg",
+            "address": "11111 Awesome St",
+            "city": "Paris",
+            "country": "France",
+            "zip": "11000",
+            "state": "Ile-de-France",
+            "phone": "00000",
+            "industry": "Tech",
+            "org": "Growth",
+            "job_title": "Developer",
+            "purchasing_time_frame": "Within a month",
+            "role_in_purchase_process": "Not involved",
+            "no_of_employees": "1-20",
+            "comments": "Love using Zoom APIs",
+            "custom_questions": [
+                {
+                "title": "Did you enjoy the registration process?",
+                "value": "Yes, alot."
+                },
+                {
+                "title": "Would you like to register for our next meeting?",
+                "value": "Absolutely."
+                }
+            ],
+            "status": "approved",
+            "create_time": "2012-04-14T16:55:30.231Z",
+            "join_url": "https://success.zoom.us/j/0000000000000"
+            }
+        ]
+        }
+
+        */
+
+
+
     }
 
 
@@ -368,4 +448,6 @@ $result = ZoomMeetingAdapter::listMeetings($userID,$bearerApiToken);
 
 $result = ZoomMeetingAdapter::getMeetingInvitation("75161416520",$bearerApiToken);
 
-echo $result;
+$result = ZoomMeetingAdapter::listMeetingRegistrants("75161416520", $bearerApiToken);
+
+echo json_encode($result);
