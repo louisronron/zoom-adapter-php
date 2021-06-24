@@ -10,7 +10,6 @@ class ZoomMeetingAdapter {
 
 
 
-
     public static function getUserIDByEmail($hostEmail, $bearerApiToken) {
         /*
             Gets the user ID by email (for meeting host)
@@ -30,17 +29,6 @@ class ZoomMeetingAdapter {
             return $array["id"];
         }
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -70,15 +58,6 @@ class ZoomMeetingAdapter {
 
 
 
-
-
-
-
-
-
-
-
-
     public static function getMeeting($meetingID, $bearerApiToken) {
         /*
             Gets the details of a particular meeting.
@@ -99,6 +78,8 @@ class ZoomMeetingAdapter {
         }
 
     }
+
+
 
 
 
@@ -176,21 +157,3 @@ class ZoomMeetingAdapter {
 
 
 }
-
-
-// user id: NLRyvAJGR9OatxB_sxc5bA
-
-// $result = ZoomMeetingAdapter::getUserIDByEmail("louisronsonronald@gmail.com", 
-// "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6ImRRWEo4X1JQVDRXX3ZLd0FKSks0M1EiLCJleHAiOjE2MjUwMzA4NTUsImlhdCI6MTYyNDQyNjA1OX0.p0WB4EBiMw3RHdXIt8FxH2Sg7vFFV9bq9YAchUD4LXk");
-
-// echo $result;
-$userID = "NLRyvAJGR9OatxB_sxc5bA";
-$bearerApiToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6ImRRWEo4X1JQVDRXX3ZLd0FKSks0M1EiLCJleHAiOjE2MjUwMzA4NTUsImlhdCI6MTYyNDQyNjA1OX0.p0WB4EBiMw3RHdXIt8FxH2Sg7vFFV9bq9YAchUD4LXk";
-
-$result = ZoomMeetingAdapter::listMeetings($userID,$bearerApiToken);
-
-$result = ZoomMeetingAdapter::getMeetingInvitation("75161416520",$bearerApiToken);
-
-$result = ZoomMeetingAdapter::listMeetingRegistrants("75161416520", $bearerApiToken);
-
-echo json_encode($result);
