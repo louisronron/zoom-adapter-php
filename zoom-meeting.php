@@ -1,5 +1,13 @@
 <?php
 
+/*
+
+Contains classes, functions, and other functionality to manipulate and manage Zoom Meetings
+By Louis Ronald
+
+*/
+
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 // Documentation for php-curl-class at https://github.com/php-curl-class/php-curl-class 
