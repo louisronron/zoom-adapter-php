@@ -182,7 +182,7 @@ class ZoomMeetingAdapter {
 
 
     public static function listMeetingRegistrants($meetingID, $bearerApiToken) {
-        /*
+        /*  
             Lists all the registrants of a meeting.
 
             This function calls the REST API endpoint documented
@@ -203,9 +203,9 @@ class ZoomMeetingAdapter {
     }
 
 
-    public static function addMeetingRegistrant($meetingID, $email, $first_name, $last_name,
-        $address, $city, $country, $zip, $state, $phone, $industry, $org, $job_title, 
-        $purchasing_time_frame, $role_in_purchase_process, $no_of_employees, $comments) 
+    public static function addMeetingRegistrant($meetingID, $email, $first_name, $last_name, $bearerApiToken,
+        $address="", $city="", $country="", $zip="", $state="", $phone="", $industry="", $org="", $job_title="", 
+        $purchasing_time_frame="", $role_in_purchase_process="", $no_of_employees="", $comments="") 
     {
         /*
             Adds a new meeting registrant
@@ -214,7 +214,21 @@ class ZoomMeetingAdapter {
             at https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrantcreate.
         */
 
+        $curl = new Curl();
+        $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
+        $curl->post('https://api.zoom.us/v2/meetings/'.$meetingID.'/registrants', [
+            'email' => $email,
+            'first_name' => $first_name,
+            'last_name' => $last_name
+        ]);
 
+        if($curl->error) {
+            echo "<br/>" . $curl->errorMessage . "     " . $curl->errorCode . "<br/>";
+            return false;
+        } else {
+            $array = json_decode(json_encode($curl->response), true);
+            return $array;
+        }
 
 
     }
