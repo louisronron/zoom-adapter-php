@@ -54,6 +54,56 @@ class ZoomMeetingAdapter {
         }
     }
 
+
+
+    public static function listScheduledMeetings($hostUserID, $bearerApiToken) {
+        /*
+            Lists all scheduled meetings organized by the host user.
+
+            This function calls the REST API endpoint documented
+            at https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetings.
+        */
+
+        $curl = new Curl();
+        $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
+        $curl->get('https://api.zoom.us/v2/users/'.$hostUserID."/meetings",[
+            "type" => "scheduled"
+        ]);
+
+        if($curl->error) {
+            return false;
+        } else {
+            $array = json_decode(json_encode($curl->response), true);
+            return $array;
+        }
+    }
+
+
+
+
+    public static function listLiveMeetings($hostUserID, $bearerApiToken) {
+        /*
+            Lists all live meetings organized by the host user.
+
+            This function calls the REST API endpoint documented
+            at https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetings.
+        */
+
+        $curl = new Curl();
+        $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
+        $curl->get('https://api.zoom.us/v2/users/'.$hostUserID."/meetings",[
+            "type" => "live"
+        ]);
+
+        if($curl->error) {
+            return false;
+        } else {
+            $array = json_decode(json_encode($curl->response), true);
+            return $array;
+        }
+    }
+
+
     
 
 
