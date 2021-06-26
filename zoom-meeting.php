@@ -107,6 +107,30 @@ class ZoomMeetingAdapter {
     
 
 
+    public static function listUpcomingMeetings($hostUserID, $bearerApiToken) {
+        /*
+            Lists all upcoming meetings organized by the host user.
+
+            This function calls the REST API endpoint documented
+            at https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetings.
+        */
+
+        $curl = new Curl();
+        $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
+        $curl->get('https://api.zoom.us/v2/users/'.$hostUserID."/meetings",[
+            "type" => "upcoming"
+        ]);
+
+        if($curl->error) {
+            return false;
+        } else {
+            $array = json_decode(json_encode($curl->response), true);
+            return $array;
+        }
+    }
+
+
+
 
     public static function getMeeting($meetingID, $bearerApiToken) {
         /*
