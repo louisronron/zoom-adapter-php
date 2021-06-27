@@ -57,96 +57,17 @@ class WebinarAdapter {
     }
 
 
-
-    public static function listScheduledMeetings($hostUserID, $bearerApiToken, $pageSize=30, $pageNumber=1) {
+    public static function getWebinar($webinarID, $bearerApiToken) {
         /*
-            Lists all scheduled meetings organized by the host user.
+            Gets the details of a particular webinar.
 
             This function calls the REST API endpoint documented
-            at https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetings.
+            at https://marketplace.zoom.us/docs/api-reference/zoom-api/webinars/webinar.
         */
 
         $curl = new Curl();
         $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
-        $curl->get('https://api.zoom.us/v2/users/'.$hostUserID."/meetings",[
-            "type" => "scheduled",
-            "page_size" => $pageSize,
-            "page_number" => $pageNumber
-        ]);
-
-        if($curl->error) {
-            return false;
-        } else {
-            $array = json_decode(json_encode($curl->response), true);
-            return $array;
-        }
-    }
-
-
-
-    public static function listLiveMeetings($hostUserID, $bearerApiToken, $pageSize=30, $pageNumber=1) {
-        /*
-            Lists all live meetings organized by the host user.
-
-            This function calls the REST API endpoint documented
-            at https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetings.
-        */
-
-        $curl = new Curl();
-        $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
-        $curl->get('https://api.zoom.us/v2/users/'.$hostUserID."/meetings",[
-            "type" => "live",
-            "page_size" => $pageSize,
-            "page_number" => $pageNumber
-        ]);
-
-        if($curl->error) {
-            return false;
-        } else {
-            $array = json_decode(json_encode($curl->response), true);
-            return $array;
-        }
-    }
-
-
-
-    public static function listUpcomingMeetings($hostUserID, $bearerApiToken, $pageSize=30, $pageNumber=1) {
-        /*
-            Lists all upcoming meetings organized by the host user.
-
-            This function calls the REST API endpoint documented
-            at https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetings.
-        */
-
-        $curl = new Curl();
-        $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
-        $curl->get('https://api.zoom.us/v2/users/'.$hostUserID."/meetings",[
-            "type" => "upcoming",
-            "page_size" => $pageSize,
-            "page_number" => $pageNumber
-        ]);
-
-        if($curl->error) {
-            return false;
-        } else {
-            $array = json_decode(json_encode($curl->response), true);
-            return $array;
-        }
-    }
-
-
-
-    public static function getMeeting($meetingID, $bearerApiToken) {
-        /*
-            Gets the details of a particular meeting.
-
-            This function calls the REST API endpoint documented
-            at https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meeting.
-        */
-
-        $curl = new Curl();
-        $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
-        $curl->get('https://api.zoom.us/v2/meetings/'.$meetingID);
+        $curl->get('https://api.zoom.us/v2/webinars/'.$webinarID);
 
         if($curl->error) {
             return false;
