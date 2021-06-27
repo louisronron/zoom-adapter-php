@@ -107,6 +107,60 @@ class WebinarAdapter {
 
 
 
+    public static function listPendingWebinarRegistrants($webinarID, $bearerApiToken, $pageSize=30, $nextPageToken="") {
+        /*  
+            Lists all the registrants of a webinar that are pending.
+
+            This function calls the REST API endpoint documented
+            at https://marketplace.zoom.us/docs/api-reference/zoom-api/webinars/webinarregistrants.
+        */
+        $registrantStatus = "pending";
+        $curl = new Curl();
+        $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
+        $curl->get('https://api.zoom.us/v2/webinars/'.$webinarID.'/registrants', [
+            "page_size" => $pageSize,
+            "next_page_token" => $nextPageToken,
+            "status" => $registrantStatus,
+        ]);
+
+        if($curl->error) {
+            return false;
+        } else {
+            $array = json_decode(json_encode($curl->response), true);
+            return $array;
+        }
+    }
+
+
+
+    public static function listDeniedWebinarRegistrants($webinarID, $bearerApiToken, $pageSize=30, $nextPageToken="") {
+        /*  
+            Lists all the registrants of a webinar that have been denied.
+
+            This function calls the REST API endpoint documented
+            at https://marketplace.zoom.us/docs/api-reference/zoom-api/webinars/webinarregistrants.
+        */
+        $registrantStatus = "denied";
+        $curl = new Curl();
+        $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
+        $curl->get('https://api.zoom.us/v2/webinars/'.$webinarID.'/registrants', [
+            "page_size" => $pageSize,
+            "next_page_token" => $nextPageToken,
+            "status" => $registrantStatus,
+        ]);
+
+        if($curl->error) {
+            return false;
+        } else {
+            $array = json_decode(json_encode($curl->response), true);
+            return $array;
+        }
+    }
+
+
+
+
+
     public static function addMeetingRegistrant($meetingID, $email, $first_name, $last_name, $bearerApiToken,
         $address="", $city="", $country="", $zip="", $state="", $phone="", $industry="", $org="", $job_title="", 
         $purchasing_time_frame="", $role_in_purchase_process="", $no_of_employees="", $comments="") {
