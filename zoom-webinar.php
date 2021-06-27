@@ -57,6 +57,7 @@ class WebinarAdapter {
     }
 
 
+
     public static function getWebinar($webinarID, $bearerApiToken) {
         /*
             Gets the details of a particular webinar.
@@ -80,41 +81,20 @@ class WebinarAdapter {
 
 
 
-    public static function getMeetingInvitation($meetingID, $bearerApiToken) {
-        /*
-            Get a meeting invitation
-
-            This function calls the REST API endpoint documented
-            at https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetinginvitation.
-        */
-
-        $curl = new Curl();
-        $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
-        $curl->get('https://api.zoom.us/v2/meetings/'.$meetingID.'/invitation');
-
-        if($curl->error) {
-            return false;
-        } else {
-            $array = json_decode(json_encode($curl->response), true);
-            return $array["invitation"];
-        }
-
-    }
-
-
-
-    public static function listMeetingRegistrants($meetingID, $bearerApiToken, $pageSize=30, $nextPageToken="") {
+    public static function listApprovedWebinarRegistrants($webinarID, $bearerApiToken, $pageSize=30, $nextPageToken="") {
         /*  
-            Lists all the registrants of a meeting.
+            Lists all the registrants of a webinar that have been approved.
 
             This function calls the REST API endpoint documented
-            at https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants.
+            at https://marketplace.zoom.us/docs/api-reference/zoom-api/webinars/webinarregistrants.
         */
+        $registrantStatus = "approved";
         $curl = new Curl();
         $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
-        $curl->get('https://api.zoom.us/v2/meetings/'.$meetingID.'/registrants', [
+        $curl->get('https://api.zoom.us/v2/webinars/'.$webinarID.'/registrants', [
             "page_size" => $pageSize,
-            "next_page_token" => $nextPageToken
+            "next_page_token" => $nextPageToken,
+            "status" => $registrantStatus,
         ]);
 
         if($curl->error) {
@@ -123,8 +103,6 @@ class WebinarAdapter {
             $array = json_decode(json_encode($curl->response), true);
             return $array;
         }
-
-
     }
 
 
