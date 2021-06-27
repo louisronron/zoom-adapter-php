@@ -34,7 +34,7 @@ class ZoomMeetingAdapter {
 
 
 
-    public static function listMeetings($hostUserID, $bearerApiToken) {
+    public static function listMeetings($hostUserID, $bearerApiToken, $pageSize=30, $pageNumber=1) {
         /*
             Lists all meetings organized by the host user.
 
@@ -44,7 +44,10 @@ class ZoomMeetingAdapter {
 
         $curl = new Curl();
         $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
-        $curl->get('https://api.zoom.us/v2/users/'.$hostUserID."/meetings");
+        $curl->get('https://api.zoom.us/v2/users/'.$hostUserID."/meetings", [
+            "page_size" => $pageSize,
+            "page_number" => $pageNumber
+        ]);
 
         if($curl->error) {
             return false;
