@@ -217,8 +217,7 @@ class ZoomMeetingAdapter {
 
     public static function addMeetingRegistrant($meetingID, $email, $first_name, $last_name, $bearerApiToken,
         $address="", $city="", $country="", $zip="", $state="", $phone="", $industry="", $org="", $job_title="", 
-        $purchasing_time_frame="", $role_in_purchase_process="", $no_of_employees="", $comments="") 
-    {
+        $purchasing_time_frame="", $role_in_purchase_process="", $no_of_employees="", $comments="") {
         /*
             Adds a new meeting registrant
 
