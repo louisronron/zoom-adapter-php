@@ -114,7 +114,7 @@ class ZoomMeetingAdapter {
     
 
 
-    public static function listUpcomingMeetings($hostUserID, $bearerApiToken) {
+    public static function listUpcomingMeetings($hostUserID, $bearerApiToken, $pageSize=30, $pageNumber=1) {
         /*
             Lists all upcoming meetings organized by the host user.
 
@@ -125,7 +125,9 @@ class ZoomMeetingAdapter {
         $curl = new Curl();
         $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
         $curl->get('https://api.zoom.us/v2/users/'.$hostUserID."/meetings",[
-            "type" => "upcoming"
+            "type" => "upcoming",
+            "page_size" => $pageSize,
+            "page_number" => $pageNumber
         ]);
 
         if($curl->error) {
