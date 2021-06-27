@@ -159,16 +159,14 @@ class WebinarAdapter {
 
 
 
-
-
-    public static function addMeetingRegistrant($meetingID, $email, $first_name, $last_name, $bearerApiToken,
+    public static function addWebinarRegistrant($webinarID, $email, $first_name, $last_name, $bearerApiToken,
         $address="", $city="", $country="", $zip="", $state="", $phone="", $industry="", $org="", $job_title="", 
         $purchasing_time_frame="", $role_in_purchase_process="", $no_of_employees="", $comments="") {
         /*
-            Adds a new meeting registrant
+            Adds a new webinar registrant
 
             This function calls the REST API endpoint documented
-            at https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrantcreate.
+            at https://marketplace.zoom.us/docs/api-reference/zoom-api/webinars/webinarregistrantcreate.
         */
 
         $curl = new Curl();
@@ -181,7 +179,7 @@ class WebinarAdapter {
 
         $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
         $curl->setHeader('Content-Type', 'application/json');
-        $curl->post('https://api.zoom.us/v2/meetings/'.$meetingID.'/registrants', $data);
+        $curl->post('https://api.zoom.us/v2/webinars/'.$webinarID.'/registrants', $data);
 
         if($curl->error) {
             return false;
