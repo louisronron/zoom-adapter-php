@@ -215,21 +215,23 @@ class ZoomMeetingAdapter {
         */
 
         $curl = new Curl();
+
+        $data = [
+            "email" => $email,
+            "first_name" => $first_name,
+            "last_name" => $last_name,
+        ];
+
         $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
-        $curl->post('https://api.zoom.us/v2/meetings/'.$meetingID.'/registrants', [
-            'email' => $email,
-            'first_name' => $first_name,
-            'last_name' => $last_name
-        ]);
+        $curl->setHeader('Content-Type', 'application/json');
+        $curl->post('https://api.zoom.us/v2/meetings/'.$meetingID.'/registrants', $data);
 
         if($curl->error) {
-            echo "<br/>" . $curl->errorMessage . "     " . $curl->errorCode . "<br/>";
             return false;
         } else {
             $array = json_decode(json_encode($curl->response), true);
             return $array;
         }
-
 
     }
 
