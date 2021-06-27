@@ -8,8 +8,13 @@ $userid = WebinarAdapter::getUserIDByEmail("working-group@bcpng.page", $jwtToken
 // $webinars = WebinarAdapter::listPendingWebinarRegistrants("94523063172", $jwtToken, $pageSize=100);
 // echo json_encode($webinars);
 
-$status = WebinarAdapter::addWebinarRegistrant("94523063172", "louisronsonronald@outlook.com", "Yolanda", "Max", $jwtToken);
+// $status = WebinarAdapter::addWebinarRegistrant("94523063172", "louisronsonronald@outlook.com", "Yolanda", "Max", $jwtToken);
+
+
+$status = WebinarAdapter::deleteWebinarRegistrant("94523063172", $jwtToken);
 echo ($status? "Yes": "No");
+
+
 
 // $webinar = WebinarAdapter::getWebinar("94523063172", $jwtToken);
 // echo json_encode($webinar);

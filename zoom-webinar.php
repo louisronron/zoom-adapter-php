@@ -192,17 +192,17 @@ class WebinarAdapter {
 
 
 
-    public static function deleteMeetingRegistrant($meetingID, $registrantID, $bearerApiToken) {
+    public static function deleteWebinarRegistrant($webinarID, $registrantID, $bearerApiToken) {
         /*
-            Deletes a new meeting registrant
+            Deletes a webinar registrant
 
             This function calls the REST API endpoint documented
-            at https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrantdelete.
+            at https://marketplace.zoom.us/docs/api-reference/zoom-api/webinars/deletewebinarregistrant.
         */
 
         $curl = new Curl();
         $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
-        $curl->delete('https://api.zoom.us/v2/meetings/'.$meetingID.'/registrants/'.$registrantID);
+        $curl->delete('https://api.zoom.us/v2/webinars/'.$webinarID.'/registrants/'.$registrantID);
 
         if($curl->error) {
             return false;
