@@ -32,22 +32,23 @@ class WebinarAdapter {
 
 
 
-    public static function listWebinars($hostUserID, $bearerApiToken, $pageSize=30, $pageNumber=1) {
+    public static function listWebinars($hostUserID, $bearerApiToken, $pageSize=30, $nextPageToken="") {
         /*
             Lists all meetings organized by the host user.
 
             This function calls the REST API endpoint documented
-            at https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetings.
+            at https://marketplace.zoom.us/docs/api-reference/zoom-api/webinars/webinars.
         */
 
         $curl = new Curl();
         $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
         $curl->get('https://api.zoom.us/v2/users/'.$hostUserID."/webinars", [
             "page_size" => $pageSize,
-            "page_number" => $pageNumber
+            "next_page_token" => $nextPageToken,
         ]);
 
         if($curl->error) {
+            echo $curl->errorCode . " " . $curl->errorMessage;
             return false;
         } else {
             $array = json_decode(json_encode($curl->response), true);
