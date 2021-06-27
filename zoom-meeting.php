@@ -190,7 +190,7 @@ class ZoomMeetingAdapter {
 
 
 
-    public static function listMeetingRegistrants($meetingID, $bearerApiToken) {
+    public static function listMeetingRegistrants($meetingID, $bearerApiToken, $pageSize=30, $nextPageToken="") {
         /*  
             Lists all the registrants of a meeting.
 
@@ -199,7 +199,10 @@ class ZoomMeetingAdapter {
         */
         $curl = new Curl();
         $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
-        $curl->get('https://api.zoom.us/v2/meetings/'.$meetingID.'/registrants');
+        $curl->get('https://api.zoom.us/v2/meetings/'.$meetingID.'/registrants', [
+            "page_size" => $pageSize,
+            "next_page_token" => $nextPageToken
+        ]);
 
         if($curl->error) {
             return false;
