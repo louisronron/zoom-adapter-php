@@ -6,13 +6,13 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Curl\Curl;
 
 
-class MeetingAdapter {
+class WebinarAdapter {
 
 
 
     public static function getUserIDByEmail($hostEmail, $bearerApiToken) {
         /*
-            Gets the user ID by email (for meeting host)
+            Gets the user ID by email (for webinar host)
 
             This function calls the REST API endpoint documented
             at https://marketplace.zoom.us/docs/api-reference/zoom-api/users/user.
@@ -32,7 +32,7 @@ class MeetingAdapter {
 
 
 
-    public static function listMeetings($hostUserID, $bearerApiToken, $pageSize=30, $pageNumber=1) {
+    public static function listWebinars($hostUserID, $bearerApiToken, $pageSize=30, $pageNumber=1) {
         /*
             Lists all meetings organized by the host user.
 
@@ -42,7 +42,7 @@ class MeetingAdapter {
 
         $curl = new Curl();
         $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
-        $curl->get('https://api.zoom.us/v2/users/'.$hostUserID."/meetings", [
+        $curl->get('https://api.zoom.us/v2/users/'.$hostUserID."/webinars", [
             "page_size" => $pageSize,
             "page_number" => $pageNumber
         ]);
