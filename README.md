@@ -6,10 +6,11 @@ Zoom Adapter PHP is an easy-to-use PHP adapter for programmatically accessing an
 
 ## Zoom API Support
 
-Currently, the Zoom API supports:
+Currently, the Zoom Adapter in PHP partially supports the following features:
 
 - Zoom Meetings
 - Zoom Webinars
+- Zoom Rooms
 
 ## How To Use
 
