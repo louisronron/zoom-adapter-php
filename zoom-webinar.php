@@ -48,7 +48,6 @@ class WebinarAdapter {
         ]);
 
         if($curl->error) {
-            echo $curl->errorCode . " " . $curl->errorMessage;
             return false;
         } else {
             $array = json_decode(json_encode($curl->response), true);
