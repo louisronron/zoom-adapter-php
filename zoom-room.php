@@ -6,27 +6,35 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Curl\Curl;
 
 
-class WebinarAdapter {
+class RoomAdapter {
 
 
 
-    public static function getUserIDByEmail($hostEmail, $bearerApiToken) {
+    public static function getRooms($bearerApiToken, $status="", $type="", $unassignedRooms=false,
+    $pageSize=30, $nextPageToken="", $locationID="") {
         /*
-            Gets the user ID by email (for webinar host)
+            Gets all Zoom Rooms created under current account (indicated by bearer Token)
 
             This function calls the REST API endpoint documented
-            at https://marketplace.zoom.us/docs/api-reference/zoom-api/users/user.
+            at https://marketplace.zoom.us/docs/api-reference/zoom-api/rooms/listzoomrooms.
         */
 
         $curl = new Curl();
         $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
-        $curl->get('https://api.zoom.us/v2/users/'.$hostEmail);
+        $curl->get('https://api.zoom.us/v2/rooms', [
+            'status' => $status, 
+            'type' => $type, 
+            'unassigned_rooms' => $unassignedRooms,
+            'page_size' => $pageSize,
+            'next_page_token' => $nextPageToken,
+            'location_id' => $locationID,
+        ]);
 
         if($curl->error) {
             return false;
         } else {
             $array = json_decode(json_encode($curl->response), true);
-            return $array["id"];
+            return $array;
         }
     }
 
