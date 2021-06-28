@@ -88,4 +88,25 @@ class RoomAdapter {
             return $array;
         }
     }
+
+
+    public static function deleteRoom($roomID, $bearerApiToken) {
+        /*
+            Deletes a Zoom Room by ID
+
+            This function calls the REST API endpoint documented
+            at https://marketplace.zoom.us/docs/api-reference/zoom-api/rooms/deleteazoomroom.
+        */
+
+        $curl = new Curl();
+        $curl->setHeader('Authorization', 'Bearer ' . $bearerApiToken);
+        $curl->delete('https://api.zoom.us/v2/rooms/'.$roomID);
+
+        if($curl->error) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }

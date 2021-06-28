@@ -3,5 +3,5 @@
 require_once("../zoom-room.php");
 
 $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6IlFlRnJtOGlVUUVLbUJDZHF0MU9nUlEiLCJleHAiOjE2MjUzMjE2NzgsImlhdCI6MTYyNDcxNjgxNH0.tIot15lt1Ptb6iWeaBYfWttqAX32EWRGzIb3oXm5ZIY";
-$rooms = RoomAdapter::addRoom($jwtToken, "Made Via PHP Room", "ZoomRoom");
+$rooms = RoomAdapter::deleteRoom("3Quart1jQf-E_2vGwXKdTg", $jwtToken);
 echo json_encode($rooms);
